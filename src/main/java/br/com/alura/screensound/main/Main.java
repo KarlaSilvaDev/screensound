@@ -2,8 +2,10 @@ package br.com.alura.screensound.main;
 
 import br.com.alura.screensound.model.Artist;
 import br.com.alura.screensound.model.ArtistType;
+import br.com.alura.screensound.model.Song;
 import br.com.alura.screensound.respository.ArtistRepository;
 
+import java.util.Optional;
 import java.util.Scanner;
 
 public class Main {
@@ -59,16 +61,59 @@ public class Main {
     }
 
     public void addArtists(){
-        System.out.println("*** CADASTRO DE ARTISTA ***");
-        System.out.println("Informe o nome do artista: ");
-        var name = scanner.nextLine();
-        System.out.println("Informe o tipo desse artista: (solo, dupla ou banda)");
-        var type = scanner.nextLine();
-        ArtistType artistType = ArtistType.valueOf(type.toUpperCase());
-        Artist artist = new Artist(name, artistType);
-        repository.save(artist);
+        var addNewArtist = "S";
+
+        while(addNewArtist.equalsIgnoreCase("s")) {
+            System.out.println("*** CADASTRO DE ARTISTA ***");
+            System.out.println("Informe o nome do artista: ");
+            var name = scanner.nextLine();
+            System.out.println("Informe o tipo desse artista: (solo, dupla ou banda)");
+            var type = scanner.nextLine();
+
+            ArtistType artistType = ArtistType.valueOf(type.toUpperCase());
+            Artist artist = new Artist(name, artistType);
+            repository.save(artist);
+
+            do {
+                System.out.println("Cadastrar novo artista? [S/N]");
+                addNewArtist = scanner.nextLine();
+
+                if (!addNewArtist.equalsIgnoreCase("S") && !addNewArtist.equalsIgnoreCase("N")){
+                    System.out.println("Resposta inválida. Responda 'S' para sim e 'N' para não.");
+                }
+            }while(!(addNewArtist.equalsIgnoreCase("S")) && !(addNewArtist.equalsIgnoreCase("N")));
+        }
     }
-    public void addSongs(){}
+    public void addSongs(){
+        var addNewSong = "S";
+
+        while(addNewSong.equalsIgnoreCase("s")){
+            System.out.println("*** CADASTRO DE MÚSICA ***");
+            System.out.println("Cadastrar música de qual artista?");
+            var artistName = scanner.nextLine();
+
+            Optional<Artist> artist = repository.findByNameContainingIgnoreCase(artistName);
+
+            if (artist.isPresent()){
+                System.out.println("Informe o título da música: ");
+                var songTitle = scanner.nextLine();
+                Song song = new Song(songTitle, artist.get());
+                artist.get().getSongs().add(song);
+                repository.save(artist.get());
+            }else{
+                System.out.println("Artista não encontrado.");
+            }
+
+            do{
+                System.out.println("Deseja cadastrar outra música? [S/N]");
+                addNewSong = scanner.nextLine();
+
+                if(!addNewSong.equalsIgnoreCase("s") && !addNewSong.equalsIgnoreCase("n")){
+                    System.out.println("Resposta inválida. Responda 'S' para sim e 'N' para não.");
+                }
+            }while(!addNewSong.equalsIgnoreCase("s") && !addNewSong.equalsIgnoreCase("n"));
+        }
+    }
     public void listSongs(){}
     public void getSongsByArtist(){}
     public void getDataFromAnArtist(){}

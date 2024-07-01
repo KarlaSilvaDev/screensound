@@ -12,9 +12,15 @@ public class Song {
     private Long id;
     @Column(unique = true)
     private String title;
-    private LocalDate releaseYear;
     @ManyToOne
     private Artist artist;
+
+    public Song(){};
+
+    public Song(String title, Artist artist) {
+        this.title = title;
+        this.artist = artist;
+    }
 
     public Long getId() {
         return id;
@@ -32,14 +38,6 @@ public class Song {
         this.title = title;
     }
 
-    public LocalDate getReleaseYear() {
-        return releaseYear;
-    }
-
-    public void setReleaseYear(LocalDate releaseYear) {
-        this.releaseYear = releaseYear;
-    }
-
     public Artist getArtist() {
         return artist;
     }
@@ -51,7 +49,6 @@ public class Song {
     @Override
     public String toString() {
         return "Música ='" + title + '\'' +
-                ", data de lançamento =" + releaseYear +
                 ", artista=" + artist;
     }
 }
