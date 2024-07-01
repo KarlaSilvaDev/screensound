@@ -2,8 +2,6 @@ package br.com.alura.screensound.model;
 
 import jakarta.persistence.*;
 
-import java.time.LocalDate;
-
 @Entity
 @Table(name = "songs")
 public class Song {

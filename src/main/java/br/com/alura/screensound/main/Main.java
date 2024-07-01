@@ -3,7 +3,8 @@ package br.com.alura.screensound.main;
 import br.com.alura.screensound.model.Artist;
 import br.com.alura.screensound.model.ArtistType;
 import br.com.alura.screensound.model.Song;
-import br.com.alura.screensound.respository.ArtistRepository;
+import br.com.alura.screensound.repository.ArtistRepository;
+import br.com.alura.screensound.service.ChatGPTQuery;
 
 import java.util.List;
 import java.util.Optional;
@@ -137,6 +138,11 @@ public class Main {
     }
 
     public void getDataFromAnArtist(){
+        System.out.println("*** COLETAR DADOS SOBRE UM ARTISTA ***");
+        System.out.println("Pesquisar dados sobre qual artista?");
+        var artistName = scanner.nextLine();
+        var data = ChatGPTQuery.getInfo(artistName);
+        System.out.println(data.trim());
 
     }
 }

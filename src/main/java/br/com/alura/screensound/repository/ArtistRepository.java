@@ -1,4 +1,4 @@
-package br.com.alura.screensound.respository;
+package br.com.alura.screensound.repository;
 
 import br.com.alura.screensound.model.Artist;
 import br.com.alura.screensound.model.Song;
