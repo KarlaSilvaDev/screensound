@@ -59,8 +59,8 @@ public class Artist {
 
     @Override
     public String toString() {
-        return "Artista='" + name + '\'' +
-                ", tipo=" + type +
+        return "Artista='" + this.name + '\'' +
+                ", tipo=" + this.type +
                 ", músicas=" + songs;
     }
 }

@@ -5,6 +5,7 @@ import br.com.alura.screensound.model.ArtistType;
 import br.com.alura.screensound.model.Song;
 import br.com.alura.screensound.respository.ArtistRepository;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
 
@@ -84,6 +85,7 @@ public class Main {
             }while(!(addNewArtist.equalsIgnoreCase("S")) && !(addNewArtist.equalsIgnoreCase("N")));
         }
     }
+
     public void addSongs(){
         var addNewSong = "S";
 
@@ -114,7 +116,27 @@ public class Main {
             }while(!addNewSong.equalsIgnoreCase("s") && !addNewSong.equalsIgnoreCase("n"));
         }
     }
-    public void listSongs(){}
-    public void getSongsByArtist(){}
-    public void getDataFromAnArtist(){}
+
+    public void listSongs(){
+        List<Artist> artists = repository.findAll();
+        artists.forEach(a -> a.getSongs().forEach(System.out::println));
+    }
+
+    public void getSongsByArtist(){
+        System.out.println("*** LISTAR MÚSICAS DE UM ARTISTA ***");
+        System.out.println("Listar músicas de qual artista?");
+        var artistName = scanner.nextLine();
+
+        List<Song> songsFromArtist = repository.getSongsByArtist(artistName);
+
+        if (songsFromArtist.isEmpty()){
+            System.out.println("Não foram encontradas músicas do artista informado.");
+        }else{
+            songsFromArtist.forEach(System.out::println);
+        }
+    }
+
+    public void getDataFromAnArtist(){
+
+    }
 }
