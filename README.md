@@ -1,6 +1,6 @@
 ![thumbnail-Desafio Java](https://github.com/jacqueline-oliveira/3355-java-desafio/assets/66698429/4b068d55-5cfc-480c-b94f-7d48b3c91eb3)
 
-# Desafio Java: Armazenamento de Artistas e Músicas
+# Screensound
 
 Este projeto consiste em uma aplicação para armazenar dados de artistas e músicas em um banco de dados relacional, podendo buscar informações por artistas e consultar dados sobre os mesmos através de integração com a API do ChatGPT.
 
